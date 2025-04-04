@@ -11,7 +11,6 @@ const TaskApp = () => {
     const [taskTime, setTaskTime] = useState("");
     const [editIndex, setEditIndex] = useState(null);
 
-    // ✅ Function to Add Task
     const handleAddTask = () => {
         if (taskInput.trim() === "" || taskDate === "" || taskTime === "") {
             toast.error("Please fill all fields! ⚠️");
@@ -21,33 +20,28 @@ const TaskApp = () => {
         const newTask = { text: taskInput, priority, date: taskDate, time: taskTime };
 
         if (editIndex !== null) {
-            // ✅ Update existing task
             const updatedTasks = [...taskList];
             updatedTasks[editIndex] = newTask;
             setTaskList(updatedTasks);
             setEditIndex(null);
             toast.success("Task Updated ✅");
         } else {
-            // ✅ Add new task
             setTaskList([...taskList, newTask]);
             toast.success("Task Added 🎉");
         }
 
-        // ✅ Clear Input Fields
         setTaskInput("");
         setTaskDate("");
         setTaskTime("");
         setPriority("high");
     };
 
-    // ✅ Function to Delete Task
     const handleDeleteTask = (index) => {
         const updatedTasks = taskList.filter((_, i) => i !== index);
         setTaskList(updatedTasks);
         toast.error("Task Removed ❌");
     };
 
-    // ✅ Function to Edit Task
     const handleEditTask = (index) => {
         const taskToEdit = taskList[index];
         setTaskInput(taskToEdit.text);
@@ -62,8 +56,6 @@ const TaskApp = () => {
             <ToastContainer />
             <div className="w-full max-w-lg p-6 bg-yellow-100 shadow-2xl rounded-md text-black">
                 <h2 className="text-center text-xl font-bold text-red-600">Task Manager</h2>
-
-                {/* ✅ Task Filter Buttons */}
                 <div className="flex justify-center gap-3 my-4">
                     {["all", "high", "medium", "low"].map((type) => (
                         <button
@@ -75,8 +67,6 @@ const TaskApp = () => {
                         </button>
                     ))}
                 </div>
-
-                {/* ✅ Task List Container */}
                 <div className="max-h-64 overflow-y-auto border p-4 rounded-lg bg-white">
                     {taskList.length === 0 ? (
                         <p className="text-gray-700 text-center">No tasks yet!</p>
@@ -116,8 +106,6 @@ const TaskApp = () => {
                             ))
                     )}
                 </div>
-
-                {/* ✅ Task Input Fields */}
                 <div className="flex flex-col gap-2 mt-4">
                     <input
                         type="text"
@@ -138,8 +126,6 @@ const TaskApp = () => {
                         value={taskTime}
                         onChange={(e) => setTaskTime(e.target.value)}
                     />
-
-                    {/* ✅ Priority Selection & Add Button */}
                     <div className="flex gap-2">
                         <select
                             className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white text-black"
